@@ -1,9 +1,0 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
-
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<GridPane fx:id="gridPane" fx:controller="com.michalgarnczarski.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10" stylesheets="@styles.css">
-    <Label GridPane.rowIndex="0" GridPane.columnIndex="0" text="Wysokość skrzydła [mm]:" />
-</GridPane>
