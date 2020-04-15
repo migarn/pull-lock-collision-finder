@@ -20,12 +20,22 @@ public class Controller {
 
     public void initialize() {
         gridPane.setAlignment(Pos.TOP_LEFT);
+
         sashHeightField.setText("0");
         pullLengthField.setText("0");
         fixingsDistanceField.setText("0");
+
         onlyNumbers(sashHeightField);
         onlyNumbers(pullLengthField);
         onlyNumbers(fixingsDistanceField);
+
+        pullLengthField.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                int fixingDistance = Integer.parseInt(pullLengthField.getText()) - 200;
+                fixingsDistanceField.setText(String.valueOf(fixingDistance));
+            }
+        }));
+
 
         // wywalić
         outputLabel.setText("Przykładowy wynik");
