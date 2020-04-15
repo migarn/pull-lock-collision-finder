@@ -11,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
-        primaryStage.setTitle("Znajdź kolizję");
+        primaryStage.setTitle("Sprawdź kolizję");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
     }
