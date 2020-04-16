@@ -14,20 +14,30 @@ public class Controller {
     @FXML
     private TextField sashHeightField;
     @FXML
+    private TextField handleLocationField;
+    @FXML
     private TextField pullLengthField;
     @FXML
     private TextField fixingsDistanceField;
+    @FXML
+    private TextField lowerFixingLocationField;
+    @FXML
+    private TextField upperFixingLocationField;
 
     public void initialize() {
         gridPane.setAlignment(Pos.TOP_LEFT);
 
         sashHeightField.setText("0");
+        handleLocationField.setText("1040");
         pullLengthField.setText("0");
         fixingsDistanceField.setText("0");
 
         onlyNumbers(sashHeightField);
+        onlyNumbers(handleLocationField);
         onlyNumbers(pullLengthField);
         onlyNumbers(fixingsDistanceField);
+        onlyNumbers(lowerFixingLocationField);
+        onlyNumbers(upperFixingLocationField);
 
         pullLengthField.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             if (!newValue) {
