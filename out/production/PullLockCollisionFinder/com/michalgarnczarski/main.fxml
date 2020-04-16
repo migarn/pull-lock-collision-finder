@@ -7,12 +7,14 @@
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10" stylesheets="@styles.css">
     <Label GridPane.rowIndex="0" GridPane.columnIndex="0" text="Wysokość skrzydła [mm]:"/>
     <TextField fx:id="sashHeightField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-    <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="Długość pochwytu [mm]:"/>
-    <TextField fx:id="pullLengthField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-    <Label GridPane.rowIndex="2" GridPane.columnIndex="0" text="Rozstaw nóżek pochwytu [mm]:"/>
-    <TextField fx:id="fixingsDistanceField" GridPane.rowIndex="2" GridPane.columnIndex="1" />
-    <Label GridPane.rowIndex="3" GridPane.columnIndex="0" text="Zamek:"/>
-    <ComboBox GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-    <Button GridPane.rowIndex="5" GridPane.columnIndex="0" text="Sprawdź kolizję"/>
-    <Label fx:id="outputLabel" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+    <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="Wysokość klamki od dołu skrzydła [mm]:"/>
+    <TextField fx:id="handleHeightField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <Label GridPane.rowIndex="2" GridPane.columnIndex="0" text="Długość pochwytu [mm]:"/>
+    <TextField fx:id="pullLengthField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <Label GridPane.rowIndex="3" GridPane.columnIndex="0" text="Rozstaw nóżek pochwytu [mm]:"/>
+    <TextField fx:id="fixingsDistanceField" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+    <Label GridPane.rowIndex="4" GridPane.columnIndex="0" text="Zamek:"/>
+    <ComboBox GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    <Button GridPane.rowIndex="6" GridPane.columnIndex="0" text="Sprawdź kolizję"/>
+    <Label fx:id="outputLabel" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
 </GridPane>
