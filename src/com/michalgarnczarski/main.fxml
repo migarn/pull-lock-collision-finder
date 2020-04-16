@@ -12,7 +12,7 @@
     <Label GridPane.rowIndex="2" GridPane.columnIndex="0" text="Długość pochwytu [mm]:"/>
     <TextField fx:id="pullLengthField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
     <Label GridPane.rowIndex="3" GridPane.columnIndex="0" text="Rozstaw nóżek pochwytu [mm]:"/>
-    <TextField fx:id="fixingsDistanceField" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+    <TextField fx:id="fixingsSpacingField" GridPane.rowIndex="3" GridPane.columnIndex="1" />
     <Label GridPane.rowIndex="4" GridPane.columnIndex="0" text="Odległość dolnej nóżki pochwytu od dołu skrzydła [mm]:"/>
     <TextField fx:id="lowerFixingLocationField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
     <Label GridPane.rowIndex="5" GridPane.columnIndex="0" text="Odległość górnej nóżki pochwytu od dołu skrzydła [mm]:"/>

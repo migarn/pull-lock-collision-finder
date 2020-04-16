@@ -18,7 +18,7 @@ public class Controller {
     @FXML
     private TextField pullLengthField;
     @FXML
-    private TextField fixingsDistanceField;
+    private TextField fixingsSpacingField;
     @FXML
     private TextField lowerFixingLocationField;
     @FXML
@@ -30,19 +30,19 @@ public class Controller {
         sashHeightField.setText("0");
         handleLocationField.setText("1040");
         pullLengthField.setText("0");
-        fixingsDistanceField.setText("0");
+        fixingsSpacingField.setText("0");
 
         onlyNumbers(sashHeightField);
         onlyNumbers(handleLocationField);
         onlyNumbers(pullLengthField);
-        onlyNumbers(fixingsDistanceField);
+        onlyNumbers(fixingsSpacingField);
         onlyNumbers(lowerFixingLocationField);
         onlyNumbers(upperFixingLocationField);
 
         pullLengthField.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             if (!newValue) {
                 int fixingDistance = Integer.parseInt(pullLengthField.getText()) - 200;
-                fixingsDistanceField.setText(String.valueOf(fixingDistance));
+                fixingsSpacingField.setText(String.valueOf(fixingDistance));
             }
         }));
 
