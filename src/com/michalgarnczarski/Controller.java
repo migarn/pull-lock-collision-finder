@@ -51,6 +51,9 @@ public class Controller {
                 if (Integer.parseInt(pullLengthField.getText()) < 500) {
                     pullLengthField.setText("500");
                 }
+                if (Integer.parseInt(pullLengthField.getText()) > Integer.parseInt(sashHeightField.getText())) {
+                    sashHeightField.setText(pullLengthField.getText());
+                }
                 fixingsSpacingField.setText(String.valueOf(Integer.parseInt(pullLengthField.getText()) - 200));
                 setParameters();
                 lowerFixingLocationField.setText(String.valueOf(this.pullLocationCalculator.getLowerFixingLocation()));
