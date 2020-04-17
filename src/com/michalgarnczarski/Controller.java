@@ -24,6 +24,13 @@ public class Controller {
     @FXML
     private TextField upperFixingLocationField;
 
+    private int sashHeight;
+    private int pullLength;
+    private int fixingsSpacing;
+    private Pull pull;
+    private PullLocationCalculator pullLocationCalculator;
+    // rozważyć reszę pól
+
     public void initialize() {
         gridPane.setAlignment(Pos.TOP_LEFT);
 
@@ -45,7 +52,9 @@ public class Controller {
                     pullLengthField.setText("500");
                 }
                 fixingsSpacingField.setText(String.valueOf(Integer.parseInt(pullLengthField.getText()) - 200));
-                // tu wywołać metodę obliczania wysokości nóżek
+                setParameters();
+                lowerFixingLocationField.setText(String.valueOf(this.pullLocationCalculator.getLowerFixingLocation()));
+                upperFixingLocationField.setText(String.valueOf(this.pullLocationCalculator.getUpperFixingLocation()));
             }
         }));
 
@@ -71,13 +80,8 @@ public class Controller {
 
     @FXML
     private void calculate() {
-        int sashHeight = Integer.parseInt(sashHeightField.getText());
-        int pullLength = Integer.parseInt(pullLengthField.getText());
-        int fixingsSpacing = Integer.parseInt(fixingsSpacingField.getText());
-        Pull pull = new Pull(pullLength, fixingsSpacing);
-        PullLocationCalculator pullLocationCalculator = new PullLocationCalculator(sashHeight, pull);
-
-        int locationMode = pullLocationCalculator.getLocationMode();
+        setParameters();
+        int locationMode = this.pullLocationCalculator.getLocationMode();
 
         String output = "";
 
@@ -87,9 +91,19 @@ public class Controller {
             output += "Montaż Symetryczny";
         }
 
-        output += "\nDolna nóżka: " + pullLocationCalculator.getLowerFixingLocation() +
-                "\nGórna nóżka: " + pullLocationCalculator.getUpperFixingLocation();
+        output += "\nDolna nóżka: " + this.pullLocationCalculator.getLowerFixingLocation() +
+                "\nGórna nóżka: " + this.pullLocationCalculator.getUpperFixingLocation();
 
         outputLabel.setText(output);
+
+        // Nie zapomnieć o porówaniu przyjętych punktów mocowań z obliczonymi
+    }
+
+    private void setParameters() {
+        this.sashHeight = Integer.parseInt(sashHeightField.getText());
+        this.pullLength = Integer.parseInt(pullLengthField.getText());
+        this.fixingsSpacing = Integer.parseInt(fixingsSpacingField.getText());
+        this.pull = new Pull(pullLength, fixingsSpacing);
+        this.pullLocationCalculator = new PullLocationCalculator(sashHeight, pull);
     }
 }
