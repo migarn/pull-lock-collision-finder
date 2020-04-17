@@ -60,10 +60,6 @@ public class Controller {
                 lowerFixingLocationField.setText(String.valueOf(Integer.parseInt(upperFixingLocationField.getText()) - Integer.parseInt(fixingsSpacingField.getText())));
             }
         }));
-
-
-        // wywalić
-        outputLabel.setText("Przykładowy wynik");
     }
 
     private void onlyNumbers(TextField textField) {
@@ -71,5 +67,22 @@ public class Controller {
             if (newValue.matches("\\d*")) return;
             textField.setText(newValue.replaceAll("[^\\d]",""));
         });
+    }
+
+    @FXML
+    private void calculate() {
+        int sashHeight = Integer.parseInt(sashHeightField.getText());
+        int pullLength = Integer.parseInt(pullLengthField.getText());
+        int fixingsSpacing = Integer.parseInt(fixingsSpacingField.getText());
+        Pull pull = new Pull(pullLength, fixingsSpacing);
+        PullLocationCalculator pullLocationCalculator = new PullLocationCalculator(sashHeight, pull);
+
+        int locationMode = pullLocationCalculator.defineLocationMode();
+
+        if (locationMode == 1) {
+            outputLabel.setText("Montaż standardowy");
+        } else if (locationMode == 0) {
+            outputLabel.setText("Montaż symetryczny");
+        }
     }
 }
