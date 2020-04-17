@@ -45,6 +45,19 @@ public class Controller {
                     pullLengthField.setText("500");
                 }
                 fixingsSpacingField.setText(String.valueOf(Integer.parseInt(pullLengthField.getText()) - 200));
+                // tu wywołać metodę obliczania wysokości nóżek
+            }
+        }));
+
+        lowerFixingLocationField.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                upperFixingLocationField.setText(String.valueOf(Integer.parseInt(lowerFixingLocationField.getText()) + Integer.parseInt(fixingsSpacingField.getText())));
+            }
+        }));
+
+        upperFixingLocationField.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                lowerFixingLocationField.setText(String.valueOf(Integer.parseInt(upperFixingLocationField.getText()) - Integer.parseInt(fixingsSpacingField.getText())));
             }
         }));
 
