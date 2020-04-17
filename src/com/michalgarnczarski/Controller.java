@@ -77,12 +77,19 @@ public class Controller {
         Pull pull = new Pull(pullLength, fixingsSpacing);
         PullLocationCalculator pullLocationCalculator = new PullLocationCalculator(sashHeight, pull);
 
-        int locationMode = pullLocationCalculator.defineLocationMode();
+        int locationMode = pullLocationCalculator.getLocationMode();
+
+        String output = "";
 
         if (locationMode == 1) {
-            outputLabel.setText("Montaż standardowy");
+            output += "Montaż standardowy";
         } else if (locationMode == 0) {
-            outputLabel.setText("Montaż symetryczny");
+            output += "Montaż Symetryczny";
         }
+
+        output += "\nDolna nóżka: " + pullLocationCalculator.getLowerFixingLocation() +
+                "\nGórna nóżka: " + pullLocationCalculator.getUpperFixingLocation();
+
+        outputLabel.setText(output);
     }
 }
