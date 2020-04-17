@@ -41,8 +41,10 @@ public class Controller {
 
         pullLengthField.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             if (!newValue) {
-                int fixingDistance = Integer.parseInt(pullLengthField.getText()) - 200;
-                fixingsSpacingField.setText(String.valueOf(fixingDistance));
+                if (Integer.parseInt(pullLengthField.getText()) < 500) {
+                    pullLengthField.setText("500");
+                }
+                fixingsSpacingField.setText(String.valueOf(Integer.parseInt(pullLengthField.getText()) - 200));
             }
         }));
 
