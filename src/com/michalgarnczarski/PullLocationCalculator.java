@@ -33,4 +33,12 @@ public class PullLocationCalculator {
     public int getUpperFixingLocation() {
         return upperFixingLocation;
     }
+
+    public int getSashHeight() {
+        return sashHeight;
+    }
+
+    public Pull getPull() {
+        return pull;
+    }
 }
