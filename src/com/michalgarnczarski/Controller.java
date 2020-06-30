@@ -61,6 +61,13 @@ public class Controller {
             }
         }));
 
+        fixingsSpacingField.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                upperFixingLocationField.setText(String.valueOf(Integer.parseInt(upperFixingLocationField.getText()) - (this.fixingsSpacing - Integer.parseInt(fixingsSpacingField.getText())) / 2));
+                lowerFixingLocationField.setText(String.valueOf(Integer.parseInt(lowerFixingLocationField.getText()) + (this.fixingsSpacing - Integer.parseInt(fixingsSpacingField.getText())) / 2));
+            }
+        }));
+
         lowerFixingLocationField.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             if (!newValue) {
                 upperFixingLocationField.setText(String.valueOf(Integer.parseInt(lowerFixingLocationField.getText()) + Integer.parseInt(fixingsSpacingField.getText())));

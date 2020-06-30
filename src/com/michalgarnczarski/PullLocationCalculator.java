@@ -10,10 +10,10 @@ public class PullLocationCalculator {
     public PullLocationCalculator(int sashHeight, Pull pull) {
         this.sashHeight = sashHeight;
         this.pull = pull;
-        if ((sashHeight - pull.getFixingsSpacing()) / 2.0 > 860.0) {
+        if ((sashHeight - pull.getLength()) / 2.0 > 760.0) {
             // 1 means 'standard' mode
             this.locationMode = 1;
-            this.lowerFixingLocation = 860;
+            this.lowerFixingLocation = 760 + (pull.getLength() - pull.getFixingsSpacing()) / 2;
         } else {
             // 0 means 'symmetrical' mode
             this.locationMode = 0;
