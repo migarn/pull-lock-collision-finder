@@ -7,6 +7,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
 
 public class Controller {
+
+    // FXML fields:
+
     @FXML
     private GridPane gridPane;
     @FXML
@@ -24,64 +27,104 @@ public class Controller {
     @FXML
     private TextField upperFixingLocationField;
 
+    // Some parameters set as class fields. More? Less?
+
     private int sashHeight;
     private int pullLength;
     private int fixingsSpacing;
     private Pull pull;
     private PullLocationCalculator pullLocationCalculator;
-    // rozważyć reszę pól
 
     public void initialize() {
-        gridPane.setAlignment(Pos.TOP_LEFT);
 
-        sashHeightField.setText("0");
-        handleLocationField.setText("1040");
-        pullLengthField.setText("0");
-        fixingsSpacingField.setText("0");
+        // REFORMAT!!!
 
-        onlyNumbers(sashHeightField);
-        onlyNumbers(handleLocationField);
-        onlyNumbers(pullLengthField);
-        onlyNumbers(fixingsSpacingField);
-        onlyNumbers(lowerFixingLocationField);
-        onlyNumbers(upperFixingLocationField);
+        this.gridPane.setAlignment(Pos.TOP_LEFT);
 
-        pullLengthField.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+        // Default fields values:
+
+        this.sashHeightField.setText("0");
+        this.handleLocationField.setText("1040");
+        this.pullLengthField.setText("0");
+        this.fixingsSpacingField.setText("0");
+
+        // Fields set as only numeric:
+
+        onlyNumbers(this.sashHeightField);
+        onlyNumbers(this.handleLocationField);
+        onlyNumbers(this.pullLengthField);
+        onlyNumbers(this.fixingsSpacingField);
+        onlyNumbers(this.lowerFixingLocationField);
+        onlyNumbers(this.upperFixingLocationField);
+
+        // Changing value of pullLengthField causes change of fixingsSpacingField, lowerFixingLocationField and
+        // upperFixingLocationField.
+
+        this.pullLengthField.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             if (!newValue) {
-                if (Integer.parseInt(pullLengthField.getText()) < 500) {
-                    pullLengthField.setText("500");
+
+                // Minimal pull length set as 300mm.
+
+                if (Integer.parseInt(this.pullLengthField.getText()) < 300) {
+                    this.pullLengthField.setText("300");
                 }
-                if (Integer.parseInt(pullLengthField.getText()) > Integer.parseInt(sashHeightField.getText())) {
-                    sashHeightField.setText(pullLengthField.getText());
+
+                // Protection from entering pull longer than sash height.
+
+                if (Integer.parseInt(this.pullLengthField.getText()) > Integer.parseInt(this.sashHeightField.getText())) {
+                    this.pullLengthField.setText(this.sashHeightField.getText());
                 }
-                fixingsSpacingField.setText(String.valueOf(Integer.parseInt(pullLengthField.getText()) - 200));
+
+                // Default fixings spacing is 200mm lower than pull's length.
+
+                this.fixingsSpacingField.setText(String.valueOf(Integer.parseInt(this.pullLengthField.getText()) - 200));
+
+                // Calling method calculating all sash and pull parameters based on the sash entered values.
+
                 setParameters();
-                lowerFixingLocationField.setText(String.valueOf(this.pullLocationCalculator.getLowerFixingLocation()));
-                upperFixingLocationField.setText(String.valueOf(this.pullLocationCalculator.getUpperFixingLocation()));
+
+                // Setting calculated fixings locations.
+
+                this.lowerFixingLocationField.setText(String.valueOf(this.pullLocationCalculator.getLowerFixingLocation()));
+                this.upperFixingLocationField.setText(String.valueOf(this.pullLocationCalculator.getUpperFixingLocation()));
             }
         }));
 
-        fixingsSpacingField.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+        // Changing value of fixingsSpacingField causes change of lowerFixingLocationField and
+        // upperFixingLocationField.
+
+        this.fixingsSpacingField.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             if (!newValue) {
-                upperFixingLocationField.setText(String.valueOf(Integer.parseInt(upperFixingLocationField.getText()) - (this.fixingsSpacing - Integer.parseInt(fixingsSpacingField.getText())) / 2));
-                lowerFixingLocationField.setText(String.valueOf(Integer.parseInt(lowerFixingLocationField.getText()) + (this.fixingsSpacing - Integer.parseInt(fixingsSpacingField.getText())) / 2));
+                this.upperFixingLocationField.setText(String.valueOf(Integer.parseInt(this.upperFixingLocationField.getText())
+                        - (this.fixingsSpacing - Integer.parseInt(this.fixingsSpacingField.getText())) / 2));
+                this.lowerFixingLocationField.setText(String.valueOf(Integer.parseInt(this.lowerFixingLocationField.getText())
+                        + (this.fixingsSpacing - Integer.parseInt(this.fixingsSpacingField.getText())) / 2));
             }
         }));
 
-        lowerFixingLocationField.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+        // Changing value of lowerFixingLocationField causes change of upperFixingLocationField.
+
+        this.lowerFixingLocationField.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             if (!newValue) {
-                upperFixingLocationField.setText(String.valueOf(Integer.parseInt(lowerFixingLocationField.getText()) + Integer.parseInt(fixingsSpacingField.getText())));
+                this.upperFixingLocationField.setText(String.valueOf(Integer.parseInt(this.lowerFixingLocationField.getText())
+                        + Integer.parseInt(this.fixingsSpacingField.getText())));
             }
         }));
 
-        upperFixingLocationField.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+        // Changing value of upperFixingLocationField causes change of lowerFixingLocationField.
+
+        this.upperFixingLocationField.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             if (!newValue) {
-                lowerFixingLocationField.setText(String.valueOf(Integer.parseInt(upperFixingLocationField.getText()) - Integer.parseInt(fixingsSpacingField.getText())));
+                this.lowerFixingLocationField.setText(String.valueOf(Integer.parseInt(this.upperFixingLocationField.getText())
+                        - Integer.parseInt(this.fixingsSpacingField.getText())));
             }
         }));
     }
 
     private void onlyNumbers(TextField textField) {
+
+        // Method protects the text fields from entering non numerical symbols.
+
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.matches("\\d*")) return;
             textField.setText(newValue.replaceAll("[^\\d]",""));
@@ -90,12 +133,18 @@ public class Controller {
 
     @FXML
     private void calculate() {
+
+        // TODO
+
         setParameters();
         int locationMode = this.pullLocationCalculator.getLocationMode();
 
         String output = "";
 
-        if (locationMode == 1) {
+        if (Integer.parseInt(this.lowerFixingLocationField.getText()) != this.pullLocationCalculator.getLowerFixingLocation()
+                || Integer.parseInt(this.upperFixingLocationField.getText()) != this.pullLocationCalculator.getUpperFixingLocation()) {
+            output += "Montaż niestandardowy";
+        } else if (locationMode == 1) {
             output += "Montaż standardowy";
         } else if (locationMode == 0) {
             output += "Montaż Symetryczny";
@@ -110,6 +159,9 @@ public class Controller {
     }
 
     private void setParameters() {
+
+        // Method passes values from fields to the parameters and calculates pull fixings location.
+
         this.sashHeight = Integer.parseInt(sashHeightField.getText());
         this.pullLength = Integer.parseInt(pullLengthField.getText());
         this.fixingsSpacing = Integer.parseInt(fixingsSpacingField.getText());
