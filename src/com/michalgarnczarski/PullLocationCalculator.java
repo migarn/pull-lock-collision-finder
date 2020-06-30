@@ -10,15 +10,23 @@ public class PullLocationCalculator {
     public PullLocationCalculator(int sashHeight, Pull pull) {
         this.sashHeight = sashHeight;
         this.pull = pull;
+
+        // Pull location mode is being calculated based on the sash and pull dimensions ratio.
+        // Pull can be located symmetrical on the sash when the pull's lowest point is located beneath 760mm from the
+        // sash lowest level. Otherwise, pull is located with 'standard' mode (pull's lowest point is located on the
+        //  level of 760mm from the sash lowest level).
+
         if ((sashHeight - pull.getLength()) / 2.0 > 760.0) {
-            // 1 means 'standard' mode
-            this.locationMode = 1;
+            this.locationMode = 1;      // 1 means 'standard' mode
             this.lowerFixingLocation = 760 + (pull.getLength() - pull.getFixingsSpacing()) / 2;
         } else {
-            // 0 means 'symmetrical' mode
-            this.locationMode = 0;
+            this.locationMode = 0;      // 0 means 'symmetrical' mode
             this.lowerFixingLocation = (int) ((sashHeight - pull.getFixingsSpacing()) / 2.0);
         }
+
+        // Regardless of location mode upper fixing location is calculated based on lower fixing location
+        // and fixings spacing.
+
         this.upperFixingLocation = this.lowerFixingLocation + pull.getFixingsSpacing();
     }
 
