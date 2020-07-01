@@ -153,7 +153,7 @@ public class Controller {
         output += "\nDolna nóżka: " + this.pullLocationCalculator.getLowerFixingLocation() +
                 "\nGórna nóżka: " + this.pullLocationCalculator.getUpperFixingLocation();
 
-        outputLabel.setText(output);
+        this.outputLabel.setText(output);
 
         // Nie zapomnieć o porówaniu przyjętych punktów mocowań z obliczonymi
     }
@@ -162,10 +162,10 @@ public class Controller {
 
         // Method passes values from fields to the parameters and calculates pull fixings location.
 
-        this.sashHeight = Integer.parseInt(sashHeightField.getText());
-        this.pullLength = Integer.parseInt(pullLengthField.getText());
-        this.fixingsSpacing = Integer.parseInt(fixingsSpacingField.getText());
-        this.pull = new Pull(pullLength, fixingsSpacing);
-        this.pullLocationCalculator = new PullLocationCalculator(sashHeight, pull);
+        this.sashHeight = Integer.parseInt(this.sashHeightField.getText());
+        this.pullLength = Integer.parseInt(this.pullLengthField.getText());
+        this.fixingsSpacing = Integer.parseInt(this.fixingsSpacingField.getText());
+        this.pull = new Pull(this.pullLength, this.fixingsSpacing);
+        this.pullLocationCalculator = new PullLocationCalculator(this.sashHeight, this.pull);
     }
 }

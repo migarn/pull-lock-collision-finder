@@ -10,10 +10,10 @@ public class Pull {
     }
 
     public int getLength() {
-        return length;
+        return this.length;
     }
 
     public int getFixingsSpacing() {
-        return fixingsSpacing;
+        return this.fixingsSpacing;
     }
 }

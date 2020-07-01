@@ -10,10 +10,10 @@ public class Lock {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public LockCassette[] getCassettes() {
-        return cassettes;
+        return this.cassettes;
     }
 }

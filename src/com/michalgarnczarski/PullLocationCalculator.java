@@ -31,22 +31,22 @@ public class PullLocationCalculator {
     }
 
     public int getLocationMode() {
-        return locationMode;
+        return this.locationMode;
     }
 
     public int getLowerFixingLocation() {
-        return lowerFixingLocation;
+        return this.lowerFixingLocation;
     }
 
     public int getUpperFixingLocation() {
-        return upperFixingLocation;
+        return this.upperFixingLocation;
     }
 
     public int getSashHeight() {
-        return sashHeight;
+        return this.sashHeight;
     }
 
     public Pull getPull() {
-        return pull;
+        return this.pull;
     }
 }

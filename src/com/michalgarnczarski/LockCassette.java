@@ -2,6 +2,8 @@ package com.michalgarnczarski;
 
 public class LockCassette {
     private int width;
+
+    // Offset is meant to be a distance between handle location and axis of the specific casette
     private int offset;
 
     public LockCassette(int width, int offset) {
@@ -10,10 +12,10 @@ public class LockCassette {
     }
 
     public int getWidth() {
-        return width;
+        return this.width;
     }
 
     public int getOffset() {
-        return offset;
+        return this.offset;
     }
 }
