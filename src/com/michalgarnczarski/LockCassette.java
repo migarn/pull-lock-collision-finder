@@ -1,10 +1,10 @@
 package com.michalgarnczarski;
 
-public class LockCasette {
+public class LockCassette {
     private int width;
     private int offset;
 
-    public LockCasette(int width, int offset) {
+    public LockCassette(int width, int offset) {
         this.width = width;
         this.offset = offset;
     }
