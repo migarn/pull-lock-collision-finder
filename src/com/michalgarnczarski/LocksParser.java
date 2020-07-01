@@ -8,11 +8,20 @@ import java.util.List;
 
 public class LocksParser {
 
-    public LocksList parseLocksFromFile(String filename) {
+    public LocksList parseLocksFromFile(String filename) throws IOException {
 
         // Description
 
         LocksList locksList = new LocksList();
+        List<String> fileAsStringsList = readLines(filename);
+
+        for (String line : fileAsStringsList) {
+
+            // Tu docelowo obsłużyć błędną linię. Try parseLock?
+
+            Lock lock = parseLock(line);
+            locksList.addLock(lock);
+        }
 
 
 
@@ -33,5 +42,25 @@ public class LocksParser {
         }
         bufferedReader.close();
         return lines;
+    }
+
+    private Lock parseLock(String line) {
+
+        // Description
+
+        String[] lockParameters = line.split(";");
+
+        String lockName = lockParameters[0];
+        LockCassette[] cassettes = new LockCassette[lockParameters.length - 1];
+
+        for (int i = 1; i < lockParameters.length; i++) {
+            String[] cassetteParameters = lockParameters[i].split(",");
+            int width = Integer.parseInt(cassetteParameters[0]);
+            int offset = Integer.parseInt(cassetteParameters[1]);
+
+            cassettes[i - 1] = new LockCassette(width, offset);
+        }
+
+        return new Lock(lockName, cassettes);
     }
 }
