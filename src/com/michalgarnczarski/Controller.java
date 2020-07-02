@@ -2,9 +2,13 @@ package com.michalgarnczarski;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Controller {
 
@@ -26,6 +30,8 @@ public class Controller {
     private TextField lowerFixingLocationField;
     @FXML
     private TextField upperFixingLocationField;
+    @FXML
+    private ComboBox locksComboBox;
 
     // Some parameters set as class fields. More? Less?
 
@@ -56,6 +62,28 @@ public class Controller {
         onlyNumbers(this.fixingsSpacingField);
         onlyNumbers(this.lowerFixingLocationField);
         onlyNumbers(this.upperFixingLocationField);
+
+
+
+
+        LocksParser locksParser = new LocksParser();
+        LocksList locksList = new LocksList();
+        ArrayList<String> locksNames = new ArrayList<>();
+
+        try {
+            locksList = locksParser.parseLocksFromFile("locks.dat");
+
+            for (Lock lock : locksList.getLocks()) {
+                locksNames.add(lock.getName());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        this.locksComboBox.getItems().addAll(locksNames);
+
+
 
         // Changing value of pullLengthField causes change of fixingsSpacingField, lowerFixingLocationField and
         // upperFixingLocationField.
