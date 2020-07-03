@@ -39,6 +39,7 @@ public class Controller {
     private int fixingsSpacing;
     private Pull pull;
     private PullLocationCalculator pullLocationCalculator;
+    private LocksList locksList;
 
     public void initialize() {
 
@@ -76,6 +77,20 @@ public class Controller {
         output += "\nDolna nóżka: " + this.pullLocationCalculator.getLowerFixingLocation() +
                 "\nGórna nóżka: " + this.pullLocationCalculator.getUpperFixingLocation();
 
+        String selectedLock = this.locksComboBox.getSelectionModel().getSelectedItem().toString();
+
+        Lock lock = null;
+
+        // zabezpieczyć, żeby nie mogło być dwóch takich samych zamków, zabezpieczyć, żeby nie mogło być pustej listy zamków
+
+        for (Lock lockInList : locksList.getLocks()) {
+            if (lockInList.getName().equals(selectedLock)) {
+                lock = lockInList;
+            }
+        }
+
+        output += "\nZamek: " + lock.getName() + ", liczba punktów: " + lock.getCassettes().length;
+
         this.outputLabel.setText(output);
 
         // Nie zapomnieć o porówaniu przyjętych punktów mocowań z obliczonymi
@@ -112,15 +127,15 @@ public class Controller {
 
     private void setLocksComboBox(String filename) {
 
-        // Method parses locks from file and passes their names into LocksComboBox.
+        // Method parses locks from file, passes their names into LocksComboBox and selects first lock as default.
 
         LocksParser locksParser = new LocksParser();
         ArrayList<String> locksNames = new ArrayList<>();
 
         try {
-            LocksList locksList = locksParser.parseLocksFromFile(filename);
+            this.locksList = locksParser.parseLocksFromFile(filename);
 
-            for (Lock lock : locksList.getLocks()) {
+            for (Lock lock : this.locksList.getLocks()) {
                 locksNames.add(lock.getName());
             }
 
@@ -129,6 +144,7 @@ public class Controller {
         }
 
         this.locksComboBox.getItems().addAll(locksNames);
+        this.locksComboBox.getSelectionModel().selectFirst();
     }
 
     private void setParameters() {
