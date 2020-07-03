@@ -6,7 +6,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -43,18 +42,58 @@ public class Controller {
 
     public void initialize() {
 
-        // REFORMAT!!!
+        // Method sets appearance, values and behaviour of controllers.
 
         this.gridPane.setAlignment(Pos.TOP_LEFT);
+        setDefaultFieldsValues();
+        setLocksComboBox("locks.dat");
+        setPullLengthFieldListener();
+        setFixingSpacingFieldListener();
+        setFixingLocationFieldsListeners();
+    }
 
-        // Default fields values:
+    @FXML
+    private void calculate() {
 
-        this.sashHeightField.setText("0");
-        this.handleLocationField.setText("1040");
-        this.pullLengthField.setText("0");
-        this.fixingsSpacingField.setText("0");
+        // do metody kalkulator?
 
-        // Fields set as only numeric:
+        // TODO
+
+        setParameters();
+        int locationMode = this.pullLocationCalculator.getLocationMode();
+
+        String output = "";
+
+        if (Integer.parseInt(this.lowerFixingLocationField.getText()) != this.pullLocationCalculator.getLowerFixingLocation()
+                || Integer.parseInt(this.upperFixingLocationField.getText()) != this.pullLocationCalculator.getUpperFixingLocation()) {
+            output += "Montaż niestandardowy";
+        } else if (locationMode == 1) {
+            output += "Montaż standardowy";
+        } else if (locationMode == 0) {
+            output += "Montaż Symetryczny";
+        }
+
+        output += "\nDolna nóżka: " + this.pullLocationCalculator.getLowerFixingLocation() +
+                "\nGórna nóżka: " + this.pullLocationCalculator.getUpperFixingLocation();
+
+        this.outputLabel.setText(output);
+
+        // Nie zapomnieć o porówaniu przyjętych punktów mocowań z obliczonymi
+    }
+
+    private void onlyNumbers(TextField textField) {
+
+        // Method protects a text field from entering non numerical symbols.
+
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.matches("\\d*")) return;
+            textField.setText(newValue.replaceAll("[^\\d]",""));
+        });
+    }
+
+    private void setDefaultFieldsValues() {
+
+        // Method sets fields as only numeric and then sets default values for all fields.
 
         onlyNumbers(this.sashHeightField);
         onlyNumbers(this.handleLocationField);
@@ -63,15 +102,23 @@ public class Controller {
         onlyNumbers(this.lowerFixingLocationField);
         onlyNumbers(this.upperFixingLocationField);
 
+        this.sashHeightField.setText("0");
+        this.handleLocationField.setText("1040");
+        this.pullLengthField.setText("0");
+        this.fixingsSpacingField.setText("0");
+        this.lowerFixingLocationField.setText("0");
+        this.upperFixingLocationField.setText("0");
+    }
 
+    private void setLocksComboBox(String filename) {
 
+        // Method parses locks from file and passes their names into LocksComboBox.
 
         LocksParser locksParser = new LocksParser();
-        LocksList locksList = new LocksList();
         ArrayList<String> locksNames = new ArrayList<>();
 
         try {
-            locksList = locksParser.parseLocksFromFile("locks.dat");
+            LocksList locksList = locksParser.parseLocksFromFile(filename);
 
             for (Lock lock : locksList.getLocks()) {
                 locksNames.add(lock.getName());
@@ -82,8 +129,20 @@ public class Controller {
         }
 
         this.locksComboBox.getItems().addAll(locksNames);
+    }
 
+    private void setParameters() {
 
+        // Method passes values from fields to the parameters and calculates pull fixings location.
+
+        this.sashHeight = Integer.parseInt(this.sashHeightField.getText());
+        this.pullLength = Integer.parseInt(this.pullLengthField.getText());
+        this.fixingsSpacing = Integer.parseInt(this.fixingsSpacingField.getText());
+        this.pull = new Pull(this.pullLength, this.fixingsSpacing);
+        this.pullLocationCalculator = new PullLocationCalculator(this.sashHeight, this.pull);
+    }
+
+    private void setPullLengthFieldListener() {
 
         // Changing value of pullLengthField causes change of fixingsSpacingField, lowerFixingLocationField and
         // upperFixingLocationField.
@@ -117,6 +176,9 @@ public class Controller {
                 this.upperFixingLocationField.setText(String.valueOf(this.pullLocationCalculator.getUpperFixingLocation()));
             }
         }));
+    }
+
+    private void setFixingSpacingFieldListener() {
 
         // Changing value of fixingsSpacingField causes change of lowerFixingLocationField and
         // upperFixingLocationField.
@@ -129,6 +191,9 @@ public class Controller {
                         + (this.fixingsSpacing - Integer.parseInt(this.fixingsSpacingField.getText())) / 2));
             }
         }));
+    }
+
+    private void setFixingLocationFieldsListeners() {
 
         // Changing value of lowerFixingLocationField causes change of upperFixingLocationField.
 
@@ -147,53 +212,5 @@ public class Controller {
                         - Integer.parseInt(this.fixingsSpacingField.getText())));
             }
         }));
-    }
-
-    private void onlyNumbers(TextField textField) {
-
-        // Method protects the text fields from entering non numerical symbols.
-
-        textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.matches("\\d*")) return;
-            textField.setText(newValue.replaceAll("[^\\d]",""));
-        });
-    }
-
-    @FXML
-    private void calculate() {
-
-        // TODO
-
-        setParameters();
-        int locationMode = this.pullLocationCalculator.getLocationMode();
-
-        String output = "";
-
-        if (Integer.parseInt(this.lowerFixingLocationField.getText()) != this.pullLocationCalculator.getLowerFixingLocation()
-                || Integer.parseInt(this.upperFixingLocationField.getText()) != this.pullLocationCalculator.getUpperFixingLocation()) {
-            output += "Montaż niestandardowy";
-        } else if (locationMode == 1) {
-            output += "Montaż standardowy";
-        } else if (locationMode == 0) {
-            output += "Montaż Symetryczny";
-        }
-
-        output += "\nDolna nóżka: " + this.pullLocationCalculator.getLowerFixingLocation() +
-                "\nGórna nóżka: " + this.pullLocationCalculator.getUpperFixingLocation();
-
-        this.outputLabel.setText(output);
-
-        // Nie zapomnieć o porówaniu przyjętych punktów mocowań z obliczonymi
-    }
-
-    private void setParameters() {
-
-        // Method passes values from fields to the parameters and calculates pull fixings location.
-
-        this.sashHeight = Integer.parseInt(this.sashHeightField.getText());
-        this.pullLength = Integer.parseInt(this.pullLengthField.getText());
-        this.fixingsSpacing = Integer.parseInt(this.fixingsSpacingField.getText());
-        this.pull = new Pull(this.pullLength, this.fixingsSpacing);
-        this.pullLocationCalculator = new PullLocationCalculator(this.sashHeight, this.pull);
     }
 }
