@@ -109,7 +109,7 @@ public class Controller {
 
 
 
-        Drawer drawer = new Drawer(this.sashHeight, this.handleLocation, new Pull(this.pullLength, this.fixingsSpacing), this.lock);
+        Drawer drawer = new Drawer(this.sashHeight, this.handleLocation, Integer.parseInt(this.lowerFixingLocationField.getText()), Integer.parseInt(this.upperFixingLocationField.getText()), new Pull(this.pullLength, this.fixingsSpacing), this.lock);
         Group drawingGroup = drawer.createSashDrawing(0.2);
         this.shapesPane.getChildren().add(drawingGroup);
 
