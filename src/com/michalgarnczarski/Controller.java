@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -40,19 +41,18 @@ public class Controller {
     private TextField upperFixingLocationField;
     @FXML
     private ComboBox locksComboBox;
-
-
     @FXML
-    private Pane mypane;
+    private Pane shapesPane;
 
     // Some parameters set as class fields. More? Less?
 
-    private int sashHeight;
+    private int sashHeight; // posortować
     private int pullLength;
     private int fixingsSpacing;
-    private Pull pull;
     private PullLocationCalculator pullLocationCalculator;
     private LocksList locksList;
+    private Lock lock;
+    private int handleLocation;
 
     public void initialize() {
 
@@ -64,23 +64,6 @@ public class Controller {
         setPullLengthFieldListener();
         setFixingSpacingFieldListener();
         setFixingLocationFieldsListeners();
-
-
-
-//        Path path = new Path();
-        Group group = new Group();
-//        //MoveTo moveTo = new MoveTo(0, 0);
-        Rectangle  rectangle = new Rectangle(0, 0, 100, 140);
-//        LineTo line2 = new LineTo(126,232);
-//        //path.getElements().add(moveTo);
-//        path.getElements().setAll(line1, line2);
-        group.getChildren().add(rectangle);
-        mypane.getChildren().add(group);
-
-        //this.mycell.setItem(group);
-
-//        this.cell = new StackPane();
-//        cell.getChildren().add(line1);
     }
 
     @FXML
@@ -109,21 +92,34 @@ public class Controller {
 
         String selectedLock = this.locksComboBox.getSelectionModel().getSelectedItem().toString();
 
-        Lock lock = null;
-
         // zabezpieczyć, żeby nie mogło być dwóch takich samych zamków, zabezpieczyć, żeby nie mogło być pustej listy zamków
 
-        for (Lock lockInList : locksList.getLocks()) {
+        for (Lock lockInList : this.locksList.getLocks()) {
             if (lockInList.getName().equals(selectedLock)) {
-                lock = lockInList;
+                this.lock = lockInList;
             }
         }
 
-        output += "\nZamek: " + lock.getName() + ", liczba punktów: " + lock.getCassettes().length;
+        output += "\nZamek: " + this.lock.getName() + ", liczba punktów: " + this.lock.getCassettes().length;
 
         this.outputLabel.setText(output);
 
         // Nie zapomnieć o porówaniu przyjętych punktów mocowań z obliczonymi
+
+
+
+
+        Drawer drawer = new Drawer(this.sashHeight, this.handleLocation, new Pull(this.pullLength, this.fixingsSpacing), this.lock);
+        Group drawingGroup = drawer.createSashDrawing(0.2);
+        this.shapesPane.getChildren().add(drawingGroup);
+
+        // czyścić przy ponownym obliczeniu
+
+
+
+
+
+
     }
 
     private void onlyNumbers(TextField textField) {
@@ -181,11 +177,11 @@ public class Controller {
 
         // Method passes values from fields to the parameters and calculates pull fixings location.
 
-        this.sashHeight = Integer.parseInt(this.sashHeightField.getText());
+        this.sashHeight = Integer.parseInt(this.sashHeightField.getText()); // posortować
         this.pullLength = Integer.parseInt(this.pullLengthField.getText());
         this.fixingsSpacing = Integer.parseInt(this.fixingsSpacingField.getText());
-        this.pull = new Pull(this.pullLength, this.fixingsSpacing);
-        this.pullLocationCalculator = new PullLocationCalculator(this.sashHeight, this.pull);
+        this.pullLocationCalculator = new PullLocationCalculator(this.sashHeight, new Pull(this.pullLength, this.fixingsSpacing));
+        this.handleLocation = Integer.parseInt(this.handleLocationField.getText());
     }
 
     private void setPullLengthFieldListener() {
