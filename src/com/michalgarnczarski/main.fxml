@@ -3,6 +3,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Cell?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <GridPane fx:id="gridPane" fx:controller="com.michalgarnczarski.Controller"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10" stylesheets="@styles.css">
     <Label GridPane.rowIndex="0" GridPane.columnIndex="0" text="Wysokość skrzydła [mm]:"/>
@@ -21,4 +26,7 @@
     <ComboBox fx:id="locksComboBox" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
     <Button GridPane.rowIndex="8" GridPane.columnIndex="0" text="Sprawdź kolizję" fx:id="button" onAction="#calculate"/>
     <Label fx:id="outputLabel" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+
+    <Pane fx:id="mypane" GridPane.rowIndex="12" GridPane.columnIndex="0"/>
+
 </GridPane>

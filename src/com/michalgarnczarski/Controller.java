@@ -2,10 +2,19 @@ package com.michalgarnczarski;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Cell;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.Group;
+import javafx.scene.shape.Rectangle;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -32,6 +41,10 @@ public class Controller {
     @FXML
     private ComboBox locksComboBox;
 
+
+    @FXML
+    private Pane mypane;
+
     // Some parameters set as class fields. More? Less?
 
     private int sashHeight;
@@ -51,6 +64,23 @@ public class Controller {
         setPullLengthFieldListener();
         setFixingSpacingFieldListener();
         setFixingLocationFieldsListeners();
+
+
+
+//        Path path = new Path();
+        Group group = new Group();
+//        //MoveTo moveTo = new MoveTo(0, 0);
+        Rectangle  rectangle = new Rectangle(0, 0, 100, 140);
+//        LineTo line2 = new LineTo(126,232);
+//        //path.getElements().add(moveTo);
+//        path.getElements().setAll(line1, line2);
+        group.getChildren().add(rectangle);
+        mypane.getChildren().add(group);
+
+        //this.mycell.setItem(group);
+
+//        this.cell = new StackPane();
+//        cell.getChildren().add(line1);
     }
 
     @FXML
