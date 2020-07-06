@@ -42,7 +42,7 @@ public class Controller {
     @FXML
     private ComboBox locksComboBox;
     @FXML
-    private Pane shapesPane;
+    private Pane drawingPane;
 
     // Some parameters set as class fields. More? Less?
 
@@ -74,6 +74,9 @@ public class Controller {
         // TODO
 
         setParameters();
+
+        this.drawingPane.getChildren().clear(); // Czyści stary rysunek
+
         int locationMode = this.pullLocationCalculator.getLocationMode();
 
         String output = "";
@@ -109,9 +112,10 @@ public class Controller {
 
 
 
-        Drawer drawer = new Drawer(this.sashHeight, this.handleLocation, Integer.parseInt(this.lowerFixingLocationField.getText()), Integer.parseInt(this.upperFixingLocationField.getText()), new Pull(this.pullLength, this.fixingsSpacing), this.lock);
+        Drawer drawer = new Drawer(this.sashHeight, this.handleLocation, Integer.parseInt(this.lowerFixingLocationField.getText()),
+                Integer.parseInt(this.upperFixingLocationField.getText()), new Pull(this.pullLength, this.fixingsSpacing), this.lock);
         Group drawingGroup = drawer.createSashDrawing(0.2);
-        this.shapesPane.getChildren().add(drawingGroup);
+        this.drawingPane.getChildren().add(drawingGroup);
 
         // czyścić przy ponownym obliczeniu
 
