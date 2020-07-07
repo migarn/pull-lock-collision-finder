@@ -14,32 +14,31 @@ public class CollisionFinder {
     }
 
     public double[] findCollision(double tolerance) {
-        double[] result = {0.0, 0.0}; // {lower fixing range, upper fixing range}
+
+        // Method finds pull and lock collisions. Collision is returned as two elements double array.
+        // Array's first element is lower fixing's minimal offset required to get rid of a collision and array's
+        // second element is upper fixing's minimal offset required to get rid of a collision.
+        // Tolerance is added to ensure safe distance between lock and fixing's screw.
+
+        double[] result = {0.0, 0.0};
 
         for (LockCassette cassette : lock.getCassettes()) {
+
+            // Iterate over all lock cassettess and if collision is find assign offset in result.
+            // One fixing cannot collide with two cassettes so no need to check which cassette collides "more".
+
             double lowerBoundary = handleLocation + cassette.getOffset() - cassette.getWidth() / 2.0 - tolerance;
             double upperBoundary = handleLocation + cassette.getOffset() + cassette.getWidth() / 2.0 + tolerance;
-
-            System.out.println("lowerBoundary " + lowerBoundary); //wyw
-            System.out.println("upperBoundary " + upperBoundary);   //wyw
-
-
-            // jedna nóżka nie może kolidować z dwoma kasetamio jednocześńie
 
             if (lowerFixingLocation > lowerBoundary && lowerFixingLocation < upperBoundary) {
                 result[0] = lowerFixingLocation - lowerBoundary < upperBoundary - lowerFixingLocation ?
                         lowerBoundary - lowerFixingLocation : upperBoundary - lowerFixingLocation;
-
-                System.out.println("dolna koliduje");
             }
 
             if (upperFixingLocation > lowerBoundary && upperFixingLocation < upperBoundary) {
                 result[1] = upperFixingLocation - lowerBoundary < upperBoundary - upperFixingLocation ?
                         lowerBoundary - upperFixingLocation : upperBoundary - upperFixingLocation;
-
-                System.out.println("górna koliduje");
             }
-
         }
 
         return result;
