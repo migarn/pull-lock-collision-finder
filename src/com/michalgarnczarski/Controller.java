@@ -105,7 +105,7 @@ public class Controller {
 
         output += "\nZamek: " + this.lock.getName() + ", liczba punktów: " + this.lock.getCassettes().length;
 
-        this.outputLabel.setText(output);
+
 
         // Nie zapomnieć o porówaniu przyjętych punktów mocowań z obliczonymi
 
@@ -118,6 +118,19 @@ public class Controller {
         this.drawingPane.getChildren().add(drawingGroup);
 
         // czyścić przy ponownym obliczeniu
+
+
+        CollisionFinder collisionFinder = new CollisionFinder(this.lock, this.handleLocation, Integer.parseInt(this.lowerFixingLocationField.getText()),
+                Integer.parseInt(this.upperFixingLocationField.getText()));
+        double[] collision = collisionFinder.findCollision(0);
+
+        output += "\nDolna nóżka koliduje na " + collision[0] + "mm\nGórna nóżka koliduje na " + collision[1] + "mm";
+
+
+
+
+        this.outputLabel.setText(output);
+
 
 
 

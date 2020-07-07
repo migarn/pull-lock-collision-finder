@@ -77,7 +77,8 @@ public class Drawer {
         Rectangle[] lockCassettes = new Rectangle[cassettesNumber];
 
         for (int i = 0; i < cassettesNumber; i++) {
-            lockCassettes[i] = new Rectangle(0, (scaledSashHeight - scaledHandleLocation - scale * this.lock.getCassettes()[i].getOffset()),
+            lockCassettes[i] = new Rectangle(0, (scaledSashHeight - scaledHandleLocation -
+                    scale * this.lock.getCassettes()[i].getOffset() - scale * this.lock.getCassettes()[i].getWidth() / 2.0),
                     scale * 60, scale * this.lock.getCassettes()[i].getWidth());
 
             lockCassettes[i].setFill(Color.TRANSPARENT);
