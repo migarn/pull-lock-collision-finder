@@ -69,67 +69,81 @@ public class Controller {
     @FXML
     private void calculate() {
 
-        // do metody kalkulator?
-
-        // TODO
+        // Parse parameters from FXML fields to pure Java fields.
 
         setParameters();
 
-        this.drawingPane.getChildren().clear(); // Czyści stary rysunek
+        // Clear pane from previous drawing.
+
+        this.drawingPane.getChildren().clear();
+
+        // Calculate location mode for sash.
 
         int locationMode = this.pullLocationCalculator.getLocationMode();
 
-        String output = "";
+        // Initialize variable for printing message.
 
-        if (Integer.parseInt(this.lowerFixingLocationField.getText()) != this.pullLocationCalculator.getLowerFixingLocation()
-                || Integer.parseInt(this.upperFixingLocationField.getText()) != this.pullLocationCalculator.getUpperFixingLocation()) {
-            output += "Montaż niestandardowy";
+        StringBuilder output = new StringBuilder();
+
+        // Compare calculated fixing locations with inserted fixing locations and print location mode message.
+
+        int lowerFixingLocation = Integer.parseInt(this.lowerFixingLocationField.getText());
+        int upperFixingLocation = Integer.parseInt(this.upperFixingLocationField.getText());
+
+        if (lowerFixingLocation != this.pullLocationCalculator.getLowerFixingLocation()
+                || upperFixingLocation != this.pullLocationCalculator.getUpperFixingLocation()) {
+            int pullOffset = Math.abs(lowerFixingLocation - this.pullLocationCalculator.getLowerFixingLocation());
+            output.append("Montaż niestandardowy (pochwyt "
+                    + ((lowerFixingLocation > this.pullLocationCalculator.getLowerFixingLocation()) ? "podwyższony" : "obniżony")
+                    + " o " + pullOffset + "mm względem położenia " + (locationMode == 1 ? "standardowego)." : "symetrycznego)."));
         } else if (locationMode == 1) {
-            output += "Montaż standardowy";
+            output.append("Montaż standardowy");
         } else if (locationMode == 0) {
-            output += "Montaż Symetryczny";
+            output.append("Montaż symetryczny");
         }
 
-        output += "\nDolna nóżka: " + this.pullLocationCalculator.getLowerFixingLocation() +
-                "\nGórna nóżka: " + this.pullLocationCalculator.getUpperFixingLocation();
-
-        String selectedLock = this.locksComboBox.getSelectionModel().getSelectedItem().toString();
-
-        // zabezpieczyć, żeby nie mogło być dwóch takich samych zamków, zabezpieczyć, żeby nie mogło być pustej listy zamków
-
-        for (Lock lockInList : this.locksList.getLocks()) {
-            if (lockInList.getName().equals(selectedLock)) {
-                this.lock = lockInList;
-            }
-        }
-
-        output += "\nZamek: " + this.lock.getName() + ", liczba punktów: " + this.lock.getCassettes().length;
 
 
+//        output += "\nDolna nóżka: " + this.pullLocationCalculator.getLowerFixingLocation() +
+//                "\nGórna nóżka: " + this.pullLocationCalculator.getUpperFixingLocation();
+//
+//        String selectedLock = this.locksComboBox.getSelectionModel().getSelectedItem().toString();
+//
+//        // zabezpieczyć, żeby nie mogło być dwóch takich samych zamków, zabezpieczyć, żeby nie mogło być pustej listy zamków
+//
+//        for (Lock lockInList : this.locksList.getLocks()) {
+//            if (lockInList.getName().equals(selectedLock)) {
+//                this.lock = lockInList;
+//            }
+//        }
+//
+//        output += "\nZamek: " + this.lock.getName() + ", liczba punktów: " + this.lock.getCassettes().length;
+//
+//
+//
+//        // Nie zapomnieć o porówaniu przyjętych punktów mocowań z obliczonymi
+//
+//
+//
+//
+//        Drawer drawer = new Drawer(this.sashHeight, this.handleLocation, Integer.parseInt(this.lowerFixingLocationField.getText()),
+//                Integer.parseInt(this.upperFixingLocationField.getText()), new Pull(this.pullLength, this.fixingsSpacing), this.lock);
+//        Group drawingGroup = drawer.createSashDrawing(0.2);
+//        this.drawingPane.getChildren().add(drawingGroup);
+//
+//        // czyścić przy ponownym obliczeniu
+//
+//
+//        CollisionFinder collisionFinder = new CollisionFinder(this.lock, this.handleLocation, Integer.parseInt(this.lowerFixingLocationField.getText()),
+//                Integer.parseInt(this.upperFixingLocationField.getText()));
+//        double[] collision = collisionFinder.findCollision(0);
+//
+//        output += "\nDolna nóżka koliduje na " + collision[0] + "mm\nGórna nóżka koliduje na " + collision[1] + "mm";
 
-        // Nie zapomnieć o porówaniu przyjętych punktów mocowań z obliczonymi
 
 
 
-
-        Drawer drawer = new Drawer(this.sashHeight, this.handleLocation, Integer.parseInt(this.lowerFixingLocationField.getText()),
-                Integer.parseInt(this.upperFixingLocationField.getText()), new Pull(this.pullLength, this.fixingsSpacing), this.lock);
-        Group drawingGroup = drawer.createSashDrawing(0.2);
-        this.drawingPane.getChildren().add(drawingGroup);
-
-        // czyścić przy ponownym obliczeniu
-
-
-        CollisionFinder collisionFinder = new CollisionFinder(this.lock, this.handleLocation, Integer.parseInt(this.lowerFixingLocationField.getText()),
-                Integer.parseInt(this.upperFixingLocationField.getText()));
-        double[] collision = collisionFinder.findCollision(0);
-
-        output += "\nDolna nóżka koliduje na " + collision[0] + "mm\nGórna nóżka koliduje na " + collision[1] + "mm";
-
-
-
-
-        this.outputLabel.setText(output);
+        this.outputLabel.setText(output.toString());
 
 
 
