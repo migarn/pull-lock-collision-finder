@@ -8,9 +8,8 @@
       <change beforePath="$PROJECT_DIR$/../PoliteWorker/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PoliteWorker/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ProducerConsumer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ProducerConsumer/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PullLockCollisionFinder/com/michalgarnczarski/CollisionFinder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PullLockCollisionFinder/com/michalgarnczarski/CollisionFinder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PullLockCollisionFinder/com/michalgarnczarski/Drawer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PullLockCollisionFinder/com/michalgarnczarski/Drawer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/michalgarnczarski/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/michalgarnczarski/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/michalgarnczarski/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/michalgarnczarski/main.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SayHello/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SayHello/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Starvation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Starvation/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TaskExample/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskExample/.idea/workspace.xml" afterDir="false" />
@@ -71,23 +70,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/locks.dat">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/main.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="75" selection-start-line="7" selection-start-column="75" selection-end-line="7" selection-end-column="75" />
+            <state relative-caret-position="85">
+              <caret line="5" column="35" lean-forward="true" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
             </state>
           </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -103,7 +93,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/CollisionFinder.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
-              <caret line="8" column="118" lean-forward="true" selection-start-line="8" selection-start-column="118" selection-end-line="8" selection-end-column="118" />
+              <caret line="8" column="118" selection-start-line="8" selection-start-column="118" selection-end-line="8" selection-end-column="118" />
             </state>
           </provider>
         </entry>
@@ -138,17 +128,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/PullLocationCalculator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="35" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="35" />
+            <state relative-caret-position="119">
+              <caret line="7" column="36" lean-forward="true" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/LocksParser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-459">
+              <caret line="24" column="61" lean-forward="true" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="96" column="129" lean-forward="true" selection-start-line="96" selection-start-column="129" selection-end-line="96" selection-end-column="129" />
+            <state relative-caret-position="366">
+              <caret line="105" column="25" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -156,8 +155,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/Drawer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
-              <caret line="90" column="5" lean-forward="true" selection-start-line="90" selection-start-column="5" selection-end-line="90" selection-end-column="5" />
+            <state relative-caret-position="198">
+              <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
             </state>
           </provider>
         </entry>
@@ -194,12 +193,12 @@
         <option value="$PROJECT_DIR$/src/com/michalgarnczarski/PullLocationCalculator.java" />
         <option value="$PROJECT_DIR$/locks.dat" />
         <option value="$PROJECT_DIR$/src/com/michalgarnczarski/LocksParser.java" />
-        <option value="$PROJECT_DIR$/src/com/michalgarnczarski/main.fxml" />
         <option value="$PROJECT_DIR$/src/com/michalgarnczarski/Main.java" />
         <option value="$PROJECT_DIR$/src/com/michalgarnczarski/Demo.java" />
         <option value="$PROJECT_DIR$/src/com/michalgarnczarski/CollisionFinder.java" />
         <option value="$PROJECT_DIR$/src/com/michalgarnczarski/Drawer.java" />
         <option value="$PROJECT_DIR$/src/com/michalgarnczarski/Controller.java" />
+        <option value="$PROJECT_DIR$/src/com/michalgarnczarski/main.fxml" />
       </list>
     </option>
   </component>
@@ -219,6 +218,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -242,7 +242,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -254,7 +253,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1594143740662" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1594320161110" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
@@ -402,7 +401,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.0554371" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.1945629" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -517,13 +516,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/LocksParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/Lock.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -538,11 +530,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/main.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
+    <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/LocksList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="75" selection-start-line="7" selection-start-column="75" selection-end-line="7" selection-end-column="75" />
+        <state relative-caret-position="255">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
@@ -553,31 +544,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/Demo.java">
+    <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/CollisionFinder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="136">
+          <caret line="8" column="118" selection-start-line="8" selection-start-column="118" selection-end-line="8" selection-end-column="118" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/PullLocationCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="35" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/CollisionFinder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="118" lean-forward="true" selection-start-line="8" selection-start-column="118" selection-end-line="8" selection-end-column="118" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/LocksList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="119">
+          <caret line="7" column="36" lean-forward="true" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -588,17 +565,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/Drawer.java">
+    <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/Demo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="90" column="5" lean-forward="true" selection-start-line="90" selection-start-column="5" selection-end-line="90" selection-end-column="5" />
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/LocksParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-459">
+          <caret line="24" column="61" lean-forward="true" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="96" column="129" lean-forward="true" selection-start-line="96" selection-start-column="129" selection-end-line="96" selection-end-column="129" />
+        <state relative-caret-position="366">
+          <caret line="105" column="25" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/Drawer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/michalgarnczarski/main.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="35" lean-forward="true" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
         </state>
       </provider>
     </entry>

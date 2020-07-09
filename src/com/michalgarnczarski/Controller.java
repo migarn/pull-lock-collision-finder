@@ -2,19 +2,12 @@ package com.michalgarnczarski;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Cell;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
 import javafx.scene.Group;
-import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,10 +36,12 @@ public class Controller {
     private ComboBox locksComboBox;
     @FXML
     private Pane drawingPane;
+    @FXML
+    private Label collisionLabel;
 
     // Some parameters set as class fields. More? Less?
 
-    private int sashHeight; // posortować
+    private int sashHeight;
     private int pullLength;
     private int fixingsSpacing;
     private PullLocationCalculator pullLocationCalculator;
@@ -93,64 +88,91 @@ public class Controller {
         if (lowerFixingLocation != this.pullLocationCalculator.getLowerFixingLocation()
                 || upperFixingLocation != this.pullLocationCalculator.getUpperFixingLocation()) {
             int pullOffset = Math.abs(lowerFixingLocation - this.pullLocationCalculator.getLowerFixingLocation());
-            output.append("Montaż niestandardowy (pochwyt "
-                    + ((lowerFixingLocation > this.pullLocationCalculator.getLowerFixingLocation()) ? "podwyższony" : "obniżony")
-                    + " o " + pullOffset + "mm względem położenia " + (locationMode == 1 ? "standardowego)." : "symetrycznego)."));
+
+            output.append("Montaż niestandardowy (pochwyt ");
+            output.append((lowerFixingLocation > this.pullLocationCalculator.getLowerFixingLocation()) ? "podwyższony o " : "obniżony o ");
+            output.append(pullOffset);
+            output.append("mm względem położenia ");
+            output.append(locationMode == 1 ? "standardowego)." : "symetrycznego).");
+
         } else if (locationMode == 1) {
-            output.append("Montaż standardowy");
+            output.append("Montaż standardowy.");
         } else if (locationMode == 0) {
-            output.append("Montaż symetryczny");
+            output.append("Montaż symetryczny.");
         }
 
+        // Print fixings location message.
 
+        output.append("\nOdległość dolnej nóżki pochwytu od dołu skrzydła: ");
+        output.append(lowerFixingLocation);
+        output.append("mm.");
+        output.append("\nOdległość dolnej nóżki pochwytu od dołu skrzydła: ");
+        output.append(upperFixingLocation);
+        output.append("mm.");
 
-//        output += "\nDolna nóżka: " + this.pullLocationCalculator.getLowerFixingLocation() +
-//                "\nGórna nóżka: " + this.pullLocationCalculator.getUpperFixingLocation();
-//
-//        String selectedLock = this.locksComboBox.getSelectionModel().getSelectedItem().toString();
-//
-//        // zabezpieczyć, żeby nie mogło być dwóch takich samych zamków, zabezpieczyć, żeby nie mogło być pustej listy zamków
-//
-//        for (Lock lockInList : this.locksList.getLocks()) {
-//            if (lockInList.getName().equals(selectedLock)) {
-//                this.lock = lockInList;
-//            }
-//        }
-//
-//        output += "\nZamek: " + this.lock.getName() + ", liczba punktów: " + this.lock.getCassettes().length;
-//
-//
-//
-//        // Nie zapomnieć o porówaniu przyjętych punktów mocowań z obliczonymi
-//
-//
-//
-//
-//        Drawer drawer = new Drawer(this.sashHeight, this.handleLocation, Integer.parseInt(this.lowerFixingLocationField.getText()),
-//                Integer.parseInt(this.upperFixingLocationField.getText()), new Pull(this.pullLength, this.fixingsSpacing), this.lock);
-//        Group drawingGroup = drawer.createSashDrawing(0.2);
-//        this.drawingPane.getChildren().add(drawingGroup);
-//
-//        // czyścić przy ponownym obliczeniu
-//
-//
-//        CollisionFinder collisionFinder = new CollisionFinder(this.lock, this.handleLocation, Integer.parseInt(this.lowerFixingLocationField.getText()),
-//                Integer.parseInt(this.upperFixingLocationField.getText()));
-//        double[] collision = collisionFinder.findCollision(0);
-//
-//        output += "\nDolna nóżka koliduje na " + collision[0] + "mm\nGórna nóżka koliduje na " + collision[1] + "mm";
+        // Parse selected lock to Lock object.
 
+        String selectedLock = this.locksComboBox.getSelectionModel().getSelectedItem().toString();
 
+        for (Lock lockInList : this.locksList.getLocks()) {
+            if (lockInList.getName().equals(selectedLock)) {
+                this.lock = lockInList;
+            }
+        }
 
+        // Draw sash.
+
+        Drawer drawer = new Drawer(this.sashHeight, this.handleLocation, lowerFixingLocation, upperFixingLocation,
+                new Pull(this.pullLength, this.fixingsSpacing), this.lock);
+        Group drawingGroup = drawer.createSashDrawing(0.2);
+        this.drawingPane.getChildren().add(drawingGroup);
+
+        // Find collision
+
+        CollisionFinder collisionFinder = new CollisionFinder(this.lock, this.handleLocation, lowerFixingLocation,
+                upperFixingLocation);
+        double[] collision = collisionFinder.findCollision(30);
+
+        // Create message for collision
+
+        String collisionOutput = "";
+
+        if (collision[0] == 0 && collision[1] == 0) {
+            collisionOutput = "Brak kolizji zamka z pochwytem.";
+        } else if (collision[0] != 0 && collision[1] == 0) {
+            collisionOutput = "Kolizja zamka z dolną nóżką pochwytu!\nSpróbuj zmienić wysokość pochwytu lub ";
+
+            if (collision[0] < 0) {
+                collisionOutput += "przesunąć pochwyt w dół o " + (int) collision[0] * (-1) + "mm.";
+            } else {
+                collisionOutput += "przesunąć pochwyt do góry o " + (int) collision[0] + "mm.";
+            }
+
+        } else if (collision[0] == 0 && collision[1] != 0) {
+            collisionOutput = "Kolizja zamka z górną nóżką pochwytu!\nSpróbuj zmienić wysokość pochwytu lub ";
+
+            if (collision[1] < 0) {
+                collisionOutput += "przesunąć pochwyt w dół o " + (int) collision[1] * (-1) + "mm.";
+            } else {
+                collisionOutput += "przesunąć pochwyt do góry o " + (int) collision[1] + "mm.";
+            }
+
+        } else {
+            collisionOutput = "Kolizja zamka z dolną i górną nóżką pochwytu!\nSpróbuj zmienić wysokość pochwytu lub ";
+
+            int greaterCollision = Math.abs(collision[0]) > Math.abs(collision[1]) ? (int) collision[0] : (int) collision[1];
+
+            if (greaterCollision < 0) {
+                collisionOutput += "przesunąć pochwyt w dół o " + greaterCollision * (-1) + "mm.";
+            } else {
+                collisionOutput += "przesunąć pochwyt do góry o " + greaterCollision + "mm.";
+            }
+        }
+
+        // Print messages.
 
         this.outputLabel.setText(output.toString());
-
-
-
-
-
-
-
+        this.collisionLabel.setText(collisionOutput);
     }
 
     private void onlyNumbers(TextField textField) {
@@ -159,7 +181,7 @@ public class Controller {
 
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.matches("\\d*")) return;
-            textField.setText(newValue.replaceAll("[^\\d]",""));
+            textField.setText(newValue.replaceAll("[^\\d]", ""));
         });
     }
 
