@@ -1,2 +1,1 @@
-# pull-lock-collision-finder
-Application finding doors's pulls and locks collisions
+![alt text](https://raw.githubusercontent.com/migarn/pull-lock-collision-finder/master/finder.png)
